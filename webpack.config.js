@@ -1,13 +1,30 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const HtmlReplaceWebpackPlugin = require('html-replace-webpack-plugin')
-const nanoid = require('nanoid').nanoid
 const {WebpackPluginServe: Serve} = require('webpack-plugin-serve')
 
 module.exports = () => {
     const plugins = []
 
     const build = path.resolve(__dirname, 'dist')
+
+    plugins.push(
+        new HtmlWebpackPlugin({
+            hash: true,
+            template: path.resolve(__dirname, 'src', 'index.template.html'),
+            entry: path.resolve(build, 'index.html')
+        })
+    )
+    plugins.push(new Serve({
+        port: 3000,
+        static: build,
+        publicPath: build,
+        waitForBuild: true,
+        open: false,
+        historyFallback: true,
+        host: 'localhost',
+        liveReload: true,
+        hmr: true
+    }))
 
     return {
         mode: 'development',
@@ -22,6 +39,9 @@ module.exports = () => {
         resolve: {
             extensions: ['.ts', '.tsx', '.js'],
         },
+        watch: true,
+        devtool: 'inline-source-map',
+        stats: 'errors-only',
         module: {
             strictExportPresence: true,
             rules: [
