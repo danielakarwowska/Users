@@ -1,6 +1,7 @@
 {
   "name": "users",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,8 +16,12 @@
     "url": "https://github.com/danielakarwowska/Users/issues"
   },
   "homepage": "https://github.com/danielakarwowska/Users#readme",
-  "description": "",
   "devDependencies": {
-    "json-server": "^0.17.0"
+    "@types/node": "^18.6.3",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.7.4",
+    "webpack": "^5.74.0"
   }
 }
