@@ -3,47 +3,36 @@ import React,{ useState } from 'react'
 import { useEffect } from 'react'
 
 
-const App = () => {
-    // const API_HOST = "http://localhost:3000"
-    // const USERS_API_URL = `${API_HOST}/users`
-    
+const App =  () => {
+    const API_HOST = "http://localhost:3000"
+    const USERS_API_URL = `${API_HOST}/users`
+    const COMPANY_API_URL = `${API_HOST}/company`
+
      const [data,setData] = useState([])
+     const [company, setCompany] = useState([])
     
-    // const fetchUsers = () => {
-    //     fetch(`${USERS_API_URL}`)
-    //     .then(res => res.json())
-    //     .then(json => setData(json))
-    // }
+    const fetchUsers = () => {
+        fetch(`${USERS_API_URL}`)
+        .then(res =>  res.json())
+        .then(json => setData(json))
+    }
 
-    // useEffect(() => {
-    //     fetchUsers()
-    // },[])
+    const fetchCompany = () => {
+        fetch(`${COMPANY_API_URL}`)
+        .then(res => res.json())
+        .then(json => setCompany(json))
+    }
 
-    return(
-        <div className="container">
-        <h1>Simple Users Table</h1>
-        <table>
-            <thead>
-            <tr>
-                <th>Company</th>
-                <th>User</th>
-
-            </tr>
-            </thead>
-            <tbody>
-                {
-                    data.map((item) => (
-                        <tr key={item.name}>
-                            <td>{item.product_name}</td>
-                            <td>{item.uri}</td>
-                            <td>{item.mail}</td>
-                            <td/>
-                        </tr>
-                    ))
-                }
-            </tbody>
-        </table>
-    </div>
-    )
+    useEffect(() => {
+        fetchUsers()
+    },[])
+    console.log(fetchUsers)
+    useEffect(()=>{
+        fetchCompany()
+    },[])
+return(
+    <Table/>
+)
+        
 }
 export default App
