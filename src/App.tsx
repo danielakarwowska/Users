@@ -2,7 +2,6 @@ import Table from './components/table'
 import React,{ useState } from 'react'
 import { useEffect } from 'react'
 
-
 const App =  () => {
     const API_HOST = "http://localhost:3000"
     const USERS_API_URL = `${API_HOST}/users`
@@ -11,14 +10,14 @@ const App =  () => {
      const [data,setData] = useState([])
      const [company, setCompany] = useState([])
     
-    const fetchUsers = () => {
-        fetch(`${USERS_API_URL}`)
+    const fetchUsers = async() => {
+       await fetch(`${USERS_API_URL}`)
         .then(res =>  res.json())
         .then(json => setData(json))
     }
 
-    const fetchCompany = () => {
-        fetch(`${COMPANY_API_URL}`)
+    const fetchCompany = async () => {
+        await fetch (`${COMPANY_API_URL}`)
         .then(res => res.json())
         .then(json => setCompany(json))
     }
@@ -30,9 +29,9 @@ const App =  () => {
     useEffect(()=>{
         fetchCompany()
     },[])
-return(
+    console.log(fetchCompany)
+    return(
     <Table/>
-)
-        
+    )       
 }
 export default App
