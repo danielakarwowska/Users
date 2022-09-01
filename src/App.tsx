@@ -1,37 +1,65 @@
-import Table from './components/table'
-import React,{ useState } from 'react'
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const App =  () => {
-    const API_HOST = "http://localhost:3000"
-    const USERS_API_URL = `${API_HOST}/users`
-    const COMPANY_API_URL = `${API_HOST}/company`
 
-     const [data,setData] = useState([])
-     const [company, setCompany] = useState([])
-    
-    const fetchUsers = async() => {
-       await fetch(`${USERS_API_URL}`)
-        .then(res =>  res.json())
-        .then(json => setData(json))
+    const fetchUsersJson = async () => {
+        let url = "http://localhost:8000/users"
+        console.log(url)
+        const res = await fetch(url)
+        const users = await res.json()
+        console.log(users)
+        return users
     }
+    fetchUsersJson()
 
-    const fetchCompany = async () => {
-        await fetch (`${COMPANY_API_URL}`)
-        .then(res => res.json())
-        .then(json => setCompany(json))
+    const fetchCompanyJson = async () => {
+        let url = "http://localhost:8000/companies"
+        const res = await fetch(url)
+        const company = await res.json()
+        console.log(company)
+        return company
+        }
+
+     
+        const all = async () => {
+        const users = await fetchUsersJson()
+        const company = await fetchCompanyJson()
     }
+    all()
 
-    useEffect(() => {
-        fetchUsers()
-    },[])
-    console.log(fetchUsers)
-    useEffect(()=>{
-        fetchCompany()
-    },[])
-    console.log(fetchCompany)
+    fetch("http://localhost:8000/").then(async response => {
+        try {
+         const users = await response.json()
+         console.log('response user?', users)
+       } catch(error) {
+         console.log('Error happened here!')
+         console.error(error)
+       }
+      })
+
     return(
-    <Table/>
-    )       
+        <div className="container">
+        <h1>Simple Users Table</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>company</th>
+            </tr>
+            </thead>
+            <tbody>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                
+                
+            </tbody>
+            <thead>
+            </thead>
+        </table>
+    </div>
+    )
+      
 }
 export default App
