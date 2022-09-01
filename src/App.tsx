@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useSyncExternalStore } from 'react'
+import { json } from 'stream/consumers'
 
 const App =  () => {
 
     const fetchUsersJson = async () => {
-        let url = "http://localhost:8000/users"
+        let url = "http://localhost:3000/users"
         console.log(url)
         const res = await fetch(url)
         const users = await res.json()
@@ -13,29 +14,13 @@ const App =  () => {
     fetchUsersJson()
 
     const fetchCompanyJson = async () => {
-        let url = "http://localhost:8000/companies"
+        let url = "http://localhost:3000/companies"
         const res = await fetch(url)
         const company = await res.json()
         console.log(company)
         return company
         }
-
-     
-        const all = async () => {
-        const users = await fetchUsersJson()
-        const company = await fetchCompanyJson()
-    }
-    all()
-
-    fetch("http://localhost:8000/").then(async response => {
-        try {
-         const users = await response.json()
-         console.log('response user?', users)
-       } catch(error) {
-         console.log('Error happened here!')
-         console.error(error)
-       }
-      })
+        fetchCompanyJson()
 
     return(
         <div className="container">
@@ -59,7 +44,6 @@ const App =  () => {
             </thead>
         </table>
     </div>
-    )
-      
+    )    
 }
 export default App
