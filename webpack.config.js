@@ -7,7 +7,7 @@ const nanoid = require('nanoid').nanoid
 module.exports = () => {
     const plugins = []
 
-    const build = path.resolve(__dirname, 'dist')
+    const build = path.resolve(__dirname, 'build')
 
     plugins.push(
         new HtmlWebpackPlugin({
