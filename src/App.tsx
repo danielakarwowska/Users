@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 const App = () => {
 
-    const data = [
+    let data = [
         {
             user: "user1",
             email: "aaa@user1.pl",
             uri: "/users/1",
             company: "Company 2",
             uris: { company: "/companies/2" },
+        },
+        {
+            user: "user10",
+            email: "aaa@user10.pl",
+            uri: "/users/10",
+            company: "Company 2",
+            uris: { company: "/companies/2" }, 
         },
         {
             user: "user3",
@@ -39,18 +46,8 @@ const App = () => {
             uris: { company: "/companies/0" },
         },
     ];
-    const companies = [
-        { name: "Company 0", uri: "/companies/0" },
-        { name: "Company 1", uri: "/companies/1" },
-        { name: "Company 2", uri: "/companies/2" },
-    ];
 
-    const obj = data.reduce((accumulator, element, index) => {
-        return {...accumulator, [element] : companies[index]}
-    } )
-    if(obj === undefined) {
-        console.log('its not working')
-    }
+
 
     return (
         <div className="container">
@@ -63,15 +60,12 @@ const App = () => {
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-
-
-
+                    {data.map((item) => (
+                        <tr key={item.uri}>
+                            <td>{item.uri}</td>
+                            <td>{item.uris.company}</td>
+                        </tr>
+                    ))}
                 </tbody>
                 <thead>
                 </thead>
