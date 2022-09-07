@@ -15,7 +15,7 @@ const App = () => {
             email: "aaa@user10.pl",
             uri: "/users/10",
             company: "Company 2",
-            uris: { company: "/companies/2" }, 
+            uris: { company: "/companies/2" },
         },
         {
             user: "user3",
@@ -46,8 +46,43 @@ const App = () => {
             uris: { company: "/companies/0" },
         },
     ];
+    const companies = [
+        { name: "Company 0", uri: "/companies/0" },
+        { name: "Company 1", uri: "/companies/1" },
+        { name: "Company 2", uri: "/companies/2" },
+      ];
 
+    const employeers = data.map((item) => {
+        return item.user
+    })
 
+    const company = companies.map((item) => {
+        return item.name
+    })
+
+    const employeersAndCompany = company.reduce((accumulator, element, index) => {
+        return { ...accumulator, [element]: employeers[index] }
+    }, {})
+
+    console.log(employeersAndCompany)
+
+    const results = []
+
+    data.forEach((employee, index) => {
+        results.push(
+            <tr key={index}>
+                <td>{employee.user}</td>
+            </tr>
+        )
+    })
+    const sumOfCompanies = []
+    companies.forEach((compan, index) => {
+        sumOfCompanies.push(
+            <tr key={index}>
+            <td>{compan.name}</td>
+        </tr>
+        )
+    })
 
     return (
         <div className="container">
@@ -55,17 +90,15 @@ const App = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>User</th>
                         <th>company</th>
+                        <th>User</th>
                     </tr>
-                </thead>
+                </thead> 
                 <tbody>
-                    {data.map((item) => (
-                        <tr key={item.uri}>
-                            <td>{item.uri}</td>
-                            <td>{item.uris.company}</td>
+                        <tr>
+                            <td>{sumOfCompanies}</td>
+                            <td>{results}</td>
                         </tr>
-                    ))}
                 </tbody>
                 <thead>
                 </thead>
@@ -74,41 +107,3 @@ const App = () => {
     )
 }
 export default App
-
-    // const fetchUsersJson = async () => {
-    //     let url = "http://localhost:3000/users"
-    //     const res = await fetch(url)
-    //     const users = await res.json()
-    //     // console.log(users)
-    //     return users
-    // }
-    // fetchUsersJson()
-
-    // const fetchCompanyJson = async () => {
-    //     let url = "http://localhost:3000/companies"
-    //     const res = await fetch(url)
-    //     const company = await res.json()
-    //     // console.log(company)
-    //     return company
-    // }
-    // fetchCompanyJson()
-
-    // const [users, setUsers] = useState (fetchUsersJson)
-
-    // const all = async () => {
-    //     const users = await fetchUsersJson()
-    //     console.log(users)
-    // }
-    // all()
-    // useEffect(() => {
-    //     const oneUser = async () =>{
-    //         try{
-    //             const users = await fetchUsersJson()
-    //             setUsers(users)
-    //         }catch(error){}
-    //     }
-    //     oneUser()
-    //     console.log(oneUser)
-    //     console.log(users)
-    //     console.log(setUsers)
-    // }, [])
