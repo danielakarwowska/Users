@@ -13,8 +13,8 @@ const Table = (props) => {
                 </thead> 
                 <tbody>
                         <tr>
-                            <td>{props.users}</td>
-                            <td>{props.companies}</td>
+                            <td>{props.title}</td>
+                            <td>{props.values}</td>
                         </tr>
                 </tbody>
                 <thead>

@@ -1,7 +1,7 @@
 import React from 'react'
 import Table from './components/Table'
 
-const App = () => {
+const App = (props) => {
 
     const fetchUsersJson = async () => {
         let url = "http://localhost:3000/users"
@@ -25,12 +25,11 @@ const App = () => {
         const companiesAndUsers = companies.reduce((accumulator, element, index) => {
             return { ...accumulator, [element]: users[index] }
         }, {})
-        console.log(companiesAndUsers)
     }
     print()
 
     return (
-        <Table/>
+        <Table title={props.companies} value={props.users}/>
     )
 }
 export default App
