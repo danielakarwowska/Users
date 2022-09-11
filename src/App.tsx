@@ -1,13 +1,16 @@
 import React from 'react'
 import Table from './components/Table'
 
-const App = (props) => {
+
+
+
+const App = () => {
 
     const fetchUsersJson = async () => {
         let url = "http://localhost:3000/users"
         const res = await fetch(url)
-        const users = await res.json()
-        return users
+        const user = await res.json()
+        return user
     }
 
     const fetchCompanyJson = async () => {
@@ -17,31 +20,23 @@ const App = (props) => {
         return companies
     }
 
-    const print = async () => {
-        const users = await fetchUsersJson()
+    const printUsers = async () => {
+        const user = await fetchUsersJson()
         const companies = await fetchCompanyJson()
-        console.log(users)
-        console.log(companies)
-        const companiesAndUsers = companies.reduce((accumulator, element, index) => {
-            return { ...accumulator, [element]: users[index] }
-        }, {})
-    }
-    print()
+
+        const addUserstoCompany = (user, companies) => {
+            companies.map((item) => ({
+              name: item.name,
+              employees: user
+                .filter((index) => index.uris.company === item.uri)
+                .map((element) => element.name),
+            }))}
+            addUserstoCompany(user,companies)
+        }
+        printUsers()
 
     return (
-        <Table title={props.companies} value={props.users}/>
+        <Table />
     )
 }
 export default App
-
-
-    // const addUserToCompany = (users, companies) => {
-    //     companies.map((item) => ({
-    //         name: item.name,
-    //         users: users
-    //             .filter((items) => items.uris.company === item.uri)
-    //             .map((element) => element.name),
-    //             return (users, companies)
-    //     }))
-    //     console.log(addUserToCompany)
-    // }
